@@ -21,20 +21,25 @@ RUN apt-get update && apt-get install -y nginx
 # 작업 디렉토리를 설정합니다.
 WORKDIR /var/www/html
 
-# Flask 애플리케이션이 위치할 디렉토리를 설정합니다.
+# Flask 애플리케이션 코드 복사
 COPY --from=python-flask /app /var/www/html/app
 
-# PHP 기본 파일을 설정합니다.
-RUN echo "<?php phpinfo(); ?>" > /var/www/html/index.php
+# PHP 파일 복사
+COPY php/ /var/www/html/php
+
+# 정적 파일 복사
+COPY static/ /var/www/html/static
 
 # Nginx 설정 파일을 복사합니다.
 COPY etc/nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Nginx의 기본 웹 디렉토리 설정
+# 기본 Nginx 설정 제거 (sites-enabled 폴더 내 기본 설정 제거)
 RUN rm /etc/nginx/sites-enabled/default
 
 # Flask 애플리케이션과 PHP를 서비스하기 위해 Nginx 및 PHP-FPM을 시작합니다.
-CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
+CMD gunicorn -w 4 -b 0.0.0.0:5000 app:app & \
+    php-fpm & \
+    nginx -g 'daemon off;'
 
 # Nginx를 통해 Flask와 PHP 애플리케이션을 서비스하기 위해 포트를 노출합니다.
 EXPOSE 80
