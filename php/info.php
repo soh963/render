@@ -1,2 +1,4 @@
 <?php
- echo phpinfo();
+// [EA] Please ensure this is not a forgotten debug statement.
+//echo phpinfo();
+echo "Hello World";
