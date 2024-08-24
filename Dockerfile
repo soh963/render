@@ -23,9 +23,9 @@ RUN rm /etc/nginx/sites-enabled/default
 # 시작 스크립트 생성
 RUN echo '#!/bin/bash\n\
 export PORT=${PORT:-5000}\n\
-gunicorn --bind 0.0.0.0:$PORT app:app &\n\
-service php7.4-fpm start\n\
-sed -i "s/\$PORT/$PORT/g" /etc/nginx/nginx.conf\n\
+gunicorn --bind 127.0.0.1:8000 app:app &\n\
+service php8.2-fpm start\n\
+sed -i "s/listen 80/listen $PORT/g" /etc/nginx/nginx.conf\n\
 nginx -g "daemon off;"' > /app/start.sh && chmod +x /app/start.sh
 
 # 시작 스크립트 실행
