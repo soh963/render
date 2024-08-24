@@ -23,12 +23,15 @@ RUN groupadd -r phpuser && useradd -r -g phpuser phpuser
 
 # PHP-FPM 설정 수정
 RUN sed -i 's/\/run\/php\/php8.2-fpm.sock/\/var\/run\/php8.2-fpm.sock/g' /etc/php/8.2/fpm/pool.d/www.conf && \
-    sed -i 's/www-data/phpuser/g' /etc/php/8.2/fpm/pool.d/www.conf
+    sed -i 's/www-data/phpuser/g' /etc/php/8.2/fpm/pool.d/www.conf && \
+    sed -i 's/;listen.mode = 0660/listen.mode = 0666/g' /etc/php/8.2/fpm/pool.d/www.conf
+
+# Nginx 사용자를 phpuser로 변경
+RUN sed -i 's/user www-data/user phpuser/g' /etc/nginx/nginx.conf
 
 # 필요한 디렉토리 생성 및 권한 설정
 RUN mkdir -p /var/run/php && \
-    chown phpuser:phpuser /var/run/php && \
-    chown -R phpuser:phpuser /app
+    chown -R phpuser:phpuser /var/run/php /app /var/log/nginx /var/lib/nginx
 
 RUN echo '#!/bin/bash\n\
 export PORT=${PORT:-5000}\n\
@@ -36,6 +39,8 @@ php-fpm8.2 --nodaemonize --fpm-config /etc/php/8.2/fpm/php-fpm.conf &\n\
 gunicorn --bind 127.0.0.1:8000 app:app &\n\
 envsubst "\\$PORT" < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf\n\
 nginx -g "daemon off;"' > /app/start.sh && chmod +x /app/start.sh
+
+USER phpuser
 
 CMD ["/app/start.sh"]
 
