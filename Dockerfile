@@ -34,7 +34,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/default
 
 # Flask 애플리케이션과 PHP를 서비스하기 위해 Nginx 및 PHP-FPM을 시작합니다.
-CMD service php8.2-fpm start && nginx -g "daemon off;"
+CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
 
 # Nginx를 통해 Flask와 PHP 애플리케이션을 서비스하기 위해 포트를 노출합니다.
 EXPOSE 80
