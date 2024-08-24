@@ -24,11 +24,13 @@ WORKDIR /var/www/html
 # Flask 애플리케이션 코드 복사
 COPY --from=python-flask /app /var/www/html/app
 
-# PHP 파일 복사
-COPY php/ /var/www/html/php
+# PHP 파일 복사 (필요한 경우)
+# 존재하는지 확인 후 주석 해제
+# COPY php/ /var/www/html/php
 
-# 정적 파일 복사
-COPY static/ /var/www/html/static
+# 정적 파일 복사 (필요한 경우)
+# 존재하는지 확인 후 주석 해제
+# COPY static/ /var/www/html/static
 
 # Nginx 설정 파일을 복사합니다.
 COPY etc/nginx/nginx.conf /etc/nginx/nginx.conf
