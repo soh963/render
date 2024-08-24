@@ -28,7 +28,7 @@ COPY --from=python-flask /app /var/www/html/app
 RUN echo "<?php phpinfo(); ?>" > /var/www/html/index.php
 
 # Nginx 설정 파일을 복사합니다.
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY etc/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Nginx의 기본 웹 디렉토리 설정
 RUN rm /etc/nginx/sites-enabled/default
