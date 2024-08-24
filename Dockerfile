@@ -8,14 +8,20 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Nginx와 PHP-FPM 설치
-RUN apt-get update && apt-get install -y nginx php-fpm openssl
+# Nginx, PHP-FPM, OpenSSL, gettext-base 설치
+RUN apt-get update && apt-get install -y nginx php-fpm openssl gettext-base
 
 # SSL 인증서 생성
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
 
 # 애플리케이션 코드를 컨테이너 안으로 복사합니다.
 COPY . .
+
+# PHP 디렉토리 생성
+RUN mkdir -p /app/php && echo "<?php phpinfo(); ?>" > /app/php/index.php
+
+# 정적 파일 디렉토리 생성
+RUN mkdir -p /app/static && echo "<html><body><h1>Static HTML</h1></body></html>" > /app/static/index.html
 
 # Nginx 설정 파일을 복사합니다.
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -30,9 +36,6 @@ gunicorn --bind 127.0.0.1:8000 app:app &\n\
 service php8.2-fpm start\n\
 envsubst \'\$PORT\' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf\n\
 nginx -g "daemon off;"' > /app/start.sh && chmod +x /app/start.sh
-
-# Nginx, PHP-FPM, OpenSSL, gettext-base 설치
-RUN apt-get update && apt-get install -y nginx php-fpm openssl gettext-base
 
 # 시작 스크립트 실행
 CMD ["/app/start.sh"]
