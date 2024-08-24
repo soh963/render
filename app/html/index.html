@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web Service</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+    h1 { color: #333; }
+  </style>
+</head>
+<body>
+<h1>Welcome to My Web Service</h1>
+<p>This is a simple HTML page serving as the frontend for our multi-language web service.</p>
+<div id="python-response"></div>
+<div id="php-response"></div>
+<div id="nodejs-response"></div>
+
+<script>
+  async function fetchData(url, elementId) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      document.getElementById(elementId).innerText = JSON.stringify(data, null, 2);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  fetchData('http://localhost:5000', 'python-response');
+  fetchData('http://localhost:8080', 'php-response');
+  fetchData('http://localhost:3000', 'nodejs-response');
+</script>
+</body>
+</html>

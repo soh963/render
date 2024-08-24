@@ -1,7 +1,7 @@
-__pycache__
+# .gitignore
+node_modules/
+__pycache__/
 *.pyc
-*.pyo
-.git
 .env
 .idea
 render.iml
