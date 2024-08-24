@@ -9,7 +9,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Nginx와 PHP-FPM 설치
-RUN apt-get update && apt-get install -y nginx php-fpm
+RUN apt-get update && apt-get install -y nginx php-fpm openssl
+
+# SSL 인증서 생성
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
 
 # 애플리케이션 코드를 컨테이너 안으로 복사합니다.
 COPY . .
