@@ -13,6 +13,9 @@ RUN npm install
 # 앱 소스 추가
 COPY . .
 
+# 환경 변수 설정 (필요한 경우)
+# ENV NODE_ENV production
+
 # 앱이 3000번 포트에서 실행됨을 알림
 EXPOSE 3000
 
