@@ -34,7 +34,7 @@ RUN echo '#!/bin/bash\n\
 export PORT=${PORT:-5000}\n\
 gunicorn --bind 127.0.0.1:8000 app:app &\n\
 service php8.2-fpm start\n\
-envsubst \'\$PORT\' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf\n\
+envsubst "\\$PORT" < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf\n\
 nginx -g "daemon off;"' > /app/start.sh && chmod +x /app/start.sh
 
 # 시작 스크립트 실행
