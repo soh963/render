@@ -6,6 +6,6 @@
     "start": "node server.js"
   },
   "dependencies": {
-    // 여기에 필요한 의존성들을 나열하세요
+
   }
 }
