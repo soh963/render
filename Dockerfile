@@ -29,11 +29,14 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # 기본 Nginx 설정 제거
 RUN rm /etc/nginx/sites-enabled/default
 
+# PHP-FPM 설정 수정
+RUN sed -i 's/www-data/root/g' /etc/php/8.2/fpm/pool.d/www.conf
+
 # 시작 스크립트 생성
 RUN echo '#!/bin/bash\n\
 export PORT=${PORT:-5000}\n\
 gunicorn --bind 127.0.0.1:8000 app:app &\n\
-service php8.2-fpm start\n\
+php-fpm8.2 &\n\
 envsubst "\\$PORT" < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf\n\
 nginx -g "daemon off;"' > /app/start.sh && chmod +x /app/start.sh
 
