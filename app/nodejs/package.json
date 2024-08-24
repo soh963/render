@@ -1,13 +1,11 @@
 {
-  "name": "nodejs-app",
+  "name": "your-app-name",
   "version": "1.0.0",
-  "description": "Node.js application for multi-language web service",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mysql2": "^3.3.1"
+    // 여기에 필요한 의존성들을 나열하세요
   }
 }
