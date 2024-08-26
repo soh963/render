@@ -6,6 +6,10 @@
 <?php include './partials/head.php' ?>
 
 <body>
+    <!--이미지 경로 확인 assets/images/bg/icon-shape/icon-shape-four.png-->
+    <?php echo $_SERVER['DOCUMENT_ROOT'] . '/aiwave/assets/images/bg/icon-shape/' ?>
+    <?php echo $_SERVER['DOCUMENT_ROOT'] . '/aiwave/img/' ?>
+    <?php include './partials/preloader.php' ?>
     <main class="page-wrapper">
         <!--..:: Start Header Top Area  ::..-->
         <?php include './partials/top_header.php' ?>
