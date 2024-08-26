@@ -2,7 +2,7 @@ AddDefaultCharset UTF-8
 RewriteEngine On
 RewriteBase /
 
-# Exclude the assets or images folder from being rewritten
+# Exclude the aiwave/assets or aiwave/images folders from being rewritten
 RewriteCond %{REQUEST_URI} !^/aiwave/assets/ [NC]
 RewriteCond %{REQUEST_URI} !^/aiwave/images/ [NC]
 
