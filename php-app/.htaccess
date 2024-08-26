@@ -1,6 +1,6 @@
 AddDefaultCharset UTF-8
 RewriteEngine On
-RewriteBase /aiwave/
+RewriteBase /var/www/html/
 
 
 # Exclude the aiwave/assets or aiwave/images folders from being rewritten
