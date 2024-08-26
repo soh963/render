@@ -1483,7 +1483,7 @@
                                             <img src="assets/images/cta-img/apple-app.png" alt="Apple Store Button">
                                         </a>
                                     </div>
-                                </div>
+                                 </div>
                                 <div class="content-right">
                                     <div class="img-right">
                                         <img src="assets/images/cta-img/view-img.png" alt="Mobile View">
