@@ -50,7 +50,7 @@
                                 <a class="btn-default @@btnClass" href="text-generator.php">Start with AI</a>
                             </div>
                             <div class="inner-shape">
-                                <img src=".$_SERVER['DOCUMENT_ROOT'] . /assets/images/bg/icon-shape/icon-shape-one.png" alt="Icon Shape" class="iconshape iconshape-one">
+                                <img src="assets/images/bg/icon-shape/icon-shape-one.png" alt="Icon Shape" class="iconshape iconshape-one">
                                 <img src="assets/images/bg/icon-shape/icon-shape-two.png" alt="Icon Shape" class="iconshape iconshape-two">
                                 <img src="assets/images/bg/icon-shape/icon-shape-three.png" alt="Icon Shape" class="iconshape iconshape-three">
                                 <img src="assets/images/bg/icon-shape/icon-shape-four.png" alt="Icon Shape" class="iconshape iconshape-four">
