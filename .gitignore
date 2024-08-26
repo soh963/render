@@ -1,12 +1,65 @@
-# .gitignore
-.git
-.gitignore
+# OS generated files
+.DS_Store
+Thumbs.db
 
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# 환경 설정 파일
-.env
-*.env
-config.json
+# Node.js
+nodejs-app/node_modules/
+nodejs-app/npm-debug.log
+nodejs-app/yarn-error.log
 
 # Python
-__pycache__/
+python-app/__pycache__/
+python-app/*.py[cod]
+python-app/*.so
+python-app/.Python
+python-app/env/
+python-app/venv/
+python-app/.env
+python-app/*.log
+
+# PHP
+php-app/vendor/
+php-app/.env
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+
+# Production build files
+/dist
+/build
+
+# Temporary files
+*.tmp
+*.temp
+
+# Docker
+.docker/
+
+# Render specific
+.render-buildpacks/
